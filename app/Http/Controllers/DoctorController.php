@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Patient;
+use App\Models\PatientRecord;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -18,4 +20,10 @@ class DoctorController extends Controller
     {
         return $this->hasMany(Patient::class);
     }
+
+    public function patientRecords()
+    {
+        return $this->hasMany(PatientRecord::class, 'doctor_id');
+    }
+
 }

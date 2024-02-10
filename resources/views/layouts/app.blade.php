@@ -14,14 +14,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA76F8DVVojuWMWiiBdGg5STY6tPn3RlAwcallback=initMap"></script>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/particles.js', 'resources/js/app.particles.js'])
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 </head>
 <body>
-    @yield('background')
-
+@yield('background')
+<canvas id="particle-canvas"></canvas>
     <div id="app">
-        <div id="particles-js">
+
         <nav class="navbar navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
 
@@ -31,6 +31,10 @@
                 </a>
 
                 <div class="navbar-icons">
+                    <a id="toggle-particles" class="navbar-icon" title="Vypnutie/Zapnutie animácie">
+                        <i class="fas fa-power-off"></i>
+                    </a>
+
                     <div class="navbar-support-phone" title="Telefónne číslo podpory">
                          <i class="fas fa-phone"></i>
                         <span class="phone-number-tooltip">+421 948 001 556</span>

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     doctorSearch();
     initMap();
 });
+
 function animateLogoOnLoad() {
     var logo = document.querySelector('.navbar-brand');
     if (logo) {
@@ -22,6 +23,12 @@ function animateLogoOnLoad() {
         }, 500);
     }
 }
+
+document.addEventListener('scroll', () => {
+    const scrollPortion = window.scrollY / (document.body.offsetHeight - window.innerHeight);
+    const moveDistance = scrollPortion * 500;
+    document.querySelector('.background-image-container img').style.transform = `translateY(-${moveDistance}%)`;
+});
 
 function controllPhoto() {
     var photoInput = document.getElementById('photo');
@@ -150,6 +157,135 @@ function updateBottomPanel() {
     }
 }
 
+
+//Particles - podľa tutoriálu
+let particlesEnabled = true;
+let requestId;
+
+document.getElementById('toggle-particles').addEventListener('click', function(e) {
+    e.preventDefault();
+    particlesEnabled = !particlesEnabled;
+
+    if (particlesEnabled) {
+        animate();
+    } else {
+        cancelAnimationFrame(requestId);
+    }
+});
+
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const mouse = {
+    x: null,
+    y: null,
+    radius: (canvas.height/110) * (canvas.width/110)
+}
+window.addEventListener('mousemove',
+    function(event) {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    }
+);
+
+let particlesArray;
+
+class Particle {
+    constructor(x, y, directionX, directionY, size, color) {
+        this.x = x;
+        this.y = y;
+        this.directionX = directionX;
+        this.directionY = directionY;
+        this.size = size;
+        this.color = color;
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+    }
+    update() {
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx*dx + dy*dy);
+        if (distance < mouse.radius + this.size){
+            if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
+                this.x += 10;
+            }
+            if (mouse.x > this.x && this.x > this.size * 10) {
+                this.x -= 10;
+            }
+            if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
+                this.y += 10;
+            }
+            if (mouse.y > this.y && this.y > this.size * 10) {
+                this.y -= 10;
+            }
+        }
+
+        if (this.x > canvas.width || this.x < 0) {
+            this.directionX = -this.directionX;
+        }
+        if (this.y > canvas.height || this.y < 0) {
+            this.directionY = -this.directionY;
+        }
+
+        this.x += this.directionX * 0.25;
+        this.y += this.directionY * 0.25;
+        this.draw();
+    }
+}
+
+function init() {
+    particlesArray = [];
+    let numberOfParticles = (canvas.height * canvas.width) / 9000;
+    for (let i = 0; i < numberOfParticles; i++) {
+        let size = (Math.random() * 5) + 1;
+        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+        let directionX = (Math.random() * 5) - 2.5;
+        let directionY = (Math.random() * 5) - 2.5;
+        let color = '#282525';
+
+        particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+    }
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+
+    for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        for (let j = i; j < particlesArray.length; j++) {
+            let distance = ((particlesArray[i].x - particlesArray[j].x) ** 2 + (particlesArray[i].y - particlesArray[j].y) ** 2);
+
+            if (distance < (canvas.width/7) * (canvas.height/7)) {
+                let opacity = 1 - distance / ((canvas.width/7) * (canvas.height/7));
+                ctx.strokeStyle = 'rgba(0,0,0,' + opacity + ')';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+
+init();
+animate();
+window.addEventListener('resize',
+    function() {
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+        init();
+    }
+);
 
 
 

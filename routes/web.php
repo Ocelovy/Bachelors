@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CommentController, Controller, DoctorController, PatientController, UserController};
+use App\Http\Controllers\{CommentController,
+    Controller,
+    DoctorController,
+    PatientController,
+    PatientRecordController,
+    UserController};
 use Illuminate\Support\Facades\Auth;
 
 Route::view('/', 'home')->name('home');
@@ -20,7 +25,8 @@ Route::prefix('doctors')->group(function () {
     Route::get('/kontakt', [DoctorController::class, 'index'])->name('kontakt');
 });
 
-Route::prefix('patients')->group(function () {
+Route::group(['middleware' => ['isDoktorOrAdmin']], function () {
+    Route::prefix('patients')->group(function () {
     Route::get('/create', [PatientController::class, 'create'])->name('patients.create');
     Route::get('/pacient', [PatientController::class, 'pacientView'])->name('pacient');
     Route::post('/', [PatientController::class, 'store'])->name('patients.store');
@@ -32,6 +38,9 @@ Route::prefix('patients')->group(function () {
     Route::get('/{patient}', [PatientController::class, 'getPatientInfo'])->name('patients.info');
     Route::get('/patients/{patient}/edit', [PatientController::class, 'edit'])->name('patients.edit');
     Route::put('/patients/{patient}', [PatientController::class, 'update'])->name('patients.update');
+    Route::get('/patients/{patient}/records', [PatientRecordController::class, 'show'])->name('patient.records.show');
+    Route::post('/patients/{patient}/records', [PatientRecordController::class, 'store'])->name('patient.records.store');
+    });
 });
 
 Route::get('/comment', [UserController::class, 'commentView'])->name('comment');

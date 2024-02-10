@@ -25,6 +25,8 @@ class UserController extends Controller
         return view('comment', compact('comments'));
     }
 
+
+
     /**
      * Display a listing of the resource.
      */
@@ -157,8 +159,6 @@ class UserController extends Controller
             return back()->with('error', 'Žiadny súbor fotky nebol odoslaný.');
         }
     }
-
-
     public function deletePhoto()
     {
         $user = Auth::user();

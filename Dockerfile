@@ -1,27 +1,12 @@
-FROM php:8.0-fpm
-LABEL authors="timot"
+FROM php:8.2-apache
 
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    git \
-    curl
+RUN docker-php-ext-install pdo pdo_mysql
 
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+WORKDIR /var/www/html
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY . .
 
-WORKDIR /var/www
+RUN chown -R www-data:www-data /var/www/html
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-COPY . /var/www
-
-RUN composer install
-
-RUN chown -R www-data:www-data /var/www
-
-EXPOSE 9000
-CMD ["php-fpm"]
-
+EXPOSE 80
