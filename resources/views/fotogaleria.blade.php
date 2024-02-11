@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
+@section('background')
+    <img src="{{ asset('.images/pozadie_index3.jpg') }}" alt="pozadie_index" class="background-image">
+@endsection
+
 @section('content')
-    <!--<div class="row justify-content-center">
+    <div class="row justify-content-center">
         <div class="col-md-8">
                 <div id="carouselExampleCaptions" class="carousel slide">
                     <div class="carousel-indicators">
@@ -51,10 +55,10 @@
                 </div>
             </div>
 
-    </div> -->
-    halo
+    </div>
+
     <div id="map"></div>
-    halo
+
 
 
 @endsection

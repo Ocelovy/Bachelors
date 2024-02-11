@@ -49,17 +49,9 @@ body::before {
     object-fit: cover;
 }
 
-.container {
-    background-color: #cdd1d9;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 15px;
-}
-
 .container, .card {
     background-color: #ffffff;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     padding: 20px;
     margin-top: 20px;
@@ -197,11 +189,6 @@ body::before {
     animation: fadeIn 0.5s ease;
 }
 
-.background-image_mapa {
-    object-fit: cover;
-    width: 100%;
-}
-
 .background-image {
     width: 100%;
     height: 100vh;
@@ -327,9 +314,8 @@ button:hover {
 }
 
 .carousel-item img {
-    width: 100%;
-    height: auto;
-    margin: auto;
+    height: 65vh;
+    object-fit: cover;
 }
 
 .carousel-item {
@@ -349,14 +335,16 @@ button:hover {
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: #000;
+    background-color: #333;
     border-radius: 50%;
     padding: 10px;
 }
 
-.map {
+#map {
     height: 400px;
     width: 100%;
+    margin-top: 20px;
+    margin-bottom: 35px;
 }
 
 .comments-container {
@@ -368,93 +356,78 @@ button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-    .comment-form {
-        margin: auto;
-        width: 60%;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+.comment-form {
+    margin: auto;
+    width: 60%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-    .comment-form-container, .comments-container {
-        margin-bottom: 30px;
-    }
+.comment-form-container, .comments-container {
+    margin-bottom: 30px;
+}
 
-    .comment-form textarea {
-        width: 100%;
-        box-sizing: border-box;
-        margin-bottom: 10px;
-    }
+.comment-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
 
-    .comment {
-        padding: 15px;
-        margin-bottom: 20px;
-        border-radius: 8px;
-        background-color: #e5e5e5;
-    }
+.comment {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #e5e5e5;
+}
 
-    .comment:hover {
-        border: 1px solid #5284f3;
-    }
+.comment:hover {
+    border: 1px solid #5284f3;
+}
 
-    h1 {
-        font-weight: bolder;
-        color: #333;
-        font-size: 30px;
-        text-align: center;
-        margin-bottom: 20px;
-    }
+h1 {
+    font-weight: bolder;
+    color: #333;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    .carousel-inner {
-        max-height: 80%;
-        margin: 0 auto;
-    }
+.edit-comment-textarea {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
 
-    .carousel-item img {
-        width: 100%;
-        height: auto;
-    }
+textarea {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
 
-    #map {
-        height: 80%;
-        width: 100%;
-    }
+.btn-save-comment {
+    background-color: #D32F2F;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
 
-    .edit-comment-textarea {
-        width: 100%;
-        height: 100px;
-        margin-top: 10px;
-        padding: 10px;
-        font-size: 16px;
-        border: 2px solid #007bff;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
-    }
-
-    textarea {
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 12px;
-        font-family: sans-serif;
-        font-size: 14px;
-        margin-bottom: 10px;
-    }
-
-    .btn-save-comment {
-        background-color: #D32F2F;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-top: 10px;
-        transition: background-color 0.3s;
-    }
-
-    .btn-save-comment:hover {
-        background-color: #0056b3;
-    }
+.btn-save-comment:hover {
+    background-color: #0056b3;
+}
 
 #flash-message {
     position: absolute;
@@ -496,18 +469,13 @@ button:hover {
     border-bottom: 1px solid #ddd;
 }
 
- .container {
-     max-width: 900px;
-     margin: auto;
- }
-
 h2 {
-    color: #2C3E50; /* Tmavomodrá */
+    color: #2C3E50;
     margin-bottom: 20px;
 }
 
 h3 {
-    color: #16A085; /* Tyrkysová */
+    color: #16A085;
     margin-bottom: 15px;
 }
 
@@ -518,7 +486,7 @@ h3 {
 }
 
 .btn-primary {
-    background-color: #3498DB; /* Modrá */
+    background-color: #3498DB;
     border-color: #3498DB;
 }
 
@@ -546,12 +514,12 @@ textarea, input[type="date"] {
 .record p {
     margin-bottom: 10px;
     font-size: 1rem;
-    color: #7F8C8D; /* Svetlosivá */
+    color: #7F8C8D;
 }
 
 .record p.label {
     font-weight: bold;
-    color: #2C3E50; /* Tmavomodrá */
+    color: #2C3E50;
     font-size: 1.2rem;
 }
 
@@ -568,11 +536,11 @@ textarea, input[type="date"] {
 .patient-info p.label {
     font-weight: bold;
     font-size: 1.2rem;
-    color: #16A085; /* Tyrkysová */
+    color: #16A085;
 }
 
 h2, h3 {
-    color: #34568B; /* Tmavomodrá */
+    color: #34568B;
 }
 
 .form-label {
@@ -581,7 +549,7 @@ h2, h3 {
 }
 
 .btn-primary {
-    background-color: #4CAF50; /* Zelená */
+    background-color: #4CAF50;
     border: none;
 }
 
@@ -629,9 +597,8 @@ div.patient-info p {
             font-size: 12px;
         }
 
-        .carousel-item img {
-            max-height: 50%;
-            max-width: 50%;
+        .carousel-item {
+            height: auto;
         }
 
         .bottom-panel a {
@@ -708,10 +675,16 @@ div.patient-info p {
         .table {
             width: fit-content;
         }
+
+        .carousel-item img {
+            height: 50vh;
+        }
+
+        .carousel-caption {
+            font-size: 14px;
+        }
+
+        #map {
+            height: 300px;
+        }
     }
-
-
-
-
-
-

@@ -14,9 +14,4 @@ class Controller extends BaseController
     {
         return view('fotogaleria');
     }
-
-    public function textView()
-    {
-        return view('text');
-    }
 }

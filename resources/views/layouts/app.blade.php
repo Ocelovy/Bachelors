@@ -6,22 +6,21 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>MedBridge</title>
-
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="icon" type="image/png" href="{{ asset('.images/meds.png') }}">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA76F8DVVojuWMWiiBdGg5STY6tPn3RlAwcallback=initMap"></script>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA76F8DVVojuWMWiiBdGg5STY6tPn3RlAw&callback=initMap"></script>
 </head>
 <body>
 @yield('background')
 <canvas id="particle-canvas"></canvas>
     <div id="app">
-
         <nav class="navbar navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
 
@@ -29,17 +28,14 @@
                     <img src="{{ asset('.images/ZILPO.png') }}" alt="logo_zilpo" class="logo-img me-2">
                     <span class="d-none d-md-inline">{{ config('MedBridge', 'MedBridge') }}</span>
                 </a>
-
                 <div class="navbar-icons">
                     <a id="toggle-particles" class="navbar-icon" title="Vypnutie/Zapnutie animácie">
                         <i class="fas fa-power-off"></i>
                     </a>
-
                     <div class="navbar-support-phone" title="Telefónne číslo podpory">
                          <i class="fas fa-phone"></i>
                         <span class="phone-number-tooltip">+421 948 001 556</span>
                     </div>
-
                     <a href="mailto:peter.hromada@example.com" class="navbar-support-link" title="Kontakt na podporu">
                         <i class="fas fa-envelope"></i>
                     </a>
@@ -121,7 +117,6 @@
                     {{ session('success') }}
                 </div>
             @endif
-
             @yield('content')
         </main>
 
@@ -129,7 +124,6 @@
             <span id="current-time"></span>
             <a>Copyright © 2024 MedBridge</a>
             <a href={{ route('kontakt') }}>Kontakt</a>
-        </div>
         </div>
     </div>
 </body>

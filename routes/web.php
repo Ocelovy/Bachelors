@@ -43,7 +43,6 @@ Route::group(['middleware' => ['isDoktorOrAdmin']], function () {
     });
 });
 
-Route::get('/comment', [UserController::class, 'commentView'])->name('comment');
 Route::get('/fotogaleria', [Controller::class, 'fotogaleriaView'])->name('fotogaleria');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -51,6 +50,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('name', UserController::class)->except(['create', 'edit', 'update', 'destroy']);
     Route::get('/user/{user}/delete', [UserController::class, 'destroy'])->name('user.delete');
+    Route::get('/comment', [UserController::class, 'commentView'])->name('comment');
 });
-
-Route::get('/text', [Controller::class, 'textView'])->name('text');

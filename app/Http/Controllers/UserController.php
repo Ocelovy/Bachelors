@@ -25,8 +25,6 @@ class UserController extends Controller
         return view('comment', compact('comments'));
     }
 
-
-
     /**
      * Display a listing of the resource.
      */
