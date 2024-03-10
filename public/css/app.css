@@ -583,7 +583,19 @@ div.patient-info p {
     font-size: 16px;
 }
 
+#notification {
+    margin-top: 20px;
+    padding: 15px;
+    max-width: 50%;
+    max-height: 25%;
+    box-sizing: border-box;
+}
+
     @media(max-width: 764px) {
+        #notification {
+            visibility: hidden;
+        }
+
         .text-box p {
             font-size: 1rem;
         }

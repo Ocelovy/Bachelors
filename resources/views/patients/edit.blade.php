@@ -17,6 +17,10 @@
         <form action="{{ route('patients.update', $patient->id) }}" method="POST">
             @csrf
             @method('PUT')
+            <div class="col-md-6">
+                <label for="inputTitle" class="form-label">Titul</label>
+                <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Zadajte titul" value="{{ $patient->title }}">
+            </div>
             <div class="col-md-12">
                 <label for="inputName" class="form-label">Meno a priezvisko<span class="text-danger">*</span></label>
                 <input type="text" name="name" class="form-control" id="inputName" placeholder="Zadajte celé meno" value="{{ $patient->name }}" required>
@@ -40,6 +44,10 @@
             <div class="form-group">
                 <label for="insurance_code">Kód poisťovne:<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="insurance_code" name="insurance_code" placeholder="24, 25, 27" value="{{ $patient->insurance_code }}" required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputContactPerson" class="form-label">Kontaktná osoba</label>
+                <input type="text" name="contact_person" class="form-control" id="inputContactPerson" placeholder="Zadajte telefónne číslo kontaktnej osoby" value="{{ $patient->contact_person }}">
             </div>
 
             <div class="form-group">

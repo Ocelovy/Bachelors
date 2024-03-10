@@ -20,6 +20,10 @@
 
         <form method="POST" action="{{ route('patients.store') }}" class="row g-3">
             @csrf
+            <div class="col-md-6">
+                <label for="inputTitle" class="form-label">Titul</label>
+                <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Zadajte titul" value="{{ old('title') }}">
+            </div>
             <div class="col-md-12">
                 <label for="inputName" class="form-label">Meno a priezvisko<span class="text-danger">*</span></label>
                 <input type="text" name="name" class="form-control" id="inputName" placeholder="Zadajte celé meno" value="{{ old('name') }}" required>
@@ -44,6 +48,10 @@
                 <label for="insurance_code">Kód poisťovne:<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="insurance_code" name="insurance_code" placeholder="24, 25, 27" value="{{ old('insurance_code') }}" required>
             </div>
+            <div class="col-md-6">
+                <label for="inputContactPerson" class="form-label">Kontaktná osoba</label>
+                <input type="text" name="contact_person" class="form-control" id="inputContactPerson" placeholder="Zadajte telefónne číslo kontaktnej osoby" value="{{ old('contact_person') }}">
+            </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary addPatientButton">Pridať pacienta</button>
                 <button type="submit" class="btn btn-primary updatePatientButton" style="display:none;">Aktualizovať pacienta</button>
@@ -57,12 +65,14 @@
             <table class="custom-table">
                 <thead>
                 <tr>
+                    <th>Titul</th>
                     <th>Meno</th>
                     <th>Email</th>
                     <th>Telefón</th>
                     <th>Adresa</th>
                     <th>Rodné číslo</th>
                     <th>Kód poisťovne</th>
+                    <th>Kontaktná osoba</th>
                     @if(auth()->check() && auth()->user()->isAdmin())
                         <th>Akcie</th>
                     @endif
@@ -71,12 +81,14 @@
                 <tbody>
                 @foreach($patients as $patient)
                     <tr>
-                        <td><a href="{{ route('patient.records.show', $patient->id) }}">{{ $patient->name }}</a></td>
+                        <td>{{ $patient->title }}</a></td>
+                        <td><a href="{{ route('patient.records.show', $patient->id) }}">{{ $patient->name }}</td>
                         <td>{{ $patient->email }}</td>
                         <td>{{ $patient->phone }}</td>
                         <td>{{ $patient->address }}</td>
                         <td>{{ $patient->birth_number }}</td>
                         <td>{{ $patient->insurance_code }}</td>
+                        <td>{{ $patient->contact_person }}</td>
                         <td>
                             @if(auth()->check() && auth()->user()->isAdmin() || auth()->user()->isDoktor())
                                 <a href="{{ route('patients.edit', $patient->id) }}" class="btn btn-primary btn-sm">Editovať</a>

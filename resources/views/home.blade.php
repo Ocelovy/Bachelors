@@ -9,7 +9,6 @@
     <div class="container" id="notification">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
                     <div class="card-header">{{ __('Oznámenie') }}</div>
 
                     <div class="card-body">
@@ -25,7 +24,6 @@
                             {{ __('Musíte sa prihlásiť!') }}
                         @endauth
                     </div>
-                </div>
             </div>
         </div>
     </div>

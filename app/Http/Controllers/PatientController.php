@@ -59,6 +59,7 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'title' => 'nullable|string|max:30',
             'name' => 'required|max:255',
             'email' => 'nullable|email|unique:patients,email',
             'phone' => 'nullable|string|max:20|regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',
@@ -70,6 +71,7 @@ class PatientController extends Controller
                 }
             }],
             'insurance_code' => 'required|string|in:0,24,25,27',
+            'contact_person' => 'nullable|string|max:20|regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',
         ]);
 
         Patient::create($validatedData);
@@ -101,6 +103,7 @@ class PatientController extends Controller
     public function update(Request $request, Patient $patient)
     {
         $validatedData = $request->validate([
+            'title' => 'nullable|string|max:30',
             'name' => 'required|max:255',
             'email' => ['nullable', 'email', Rule::unique('patients')->ignore($patient->id)],
             'phone' => 'nullable|string|max:20|regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',
@@ -111,6 +114,7 @@ class PatientController extends Controller
                 }
             }],
             'insurance_code' => 'required|string|in:0,24,25,27',
+            'contact_person' => 'nullable|string|max:20|regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',
         ]);
 
         $patient->update($validatedData);

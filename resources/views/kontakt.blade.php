@@ -20,6 +20,7 @@
                             <img src="{{ $doctor->user->photo ? asset('storage/' . $doctor->user->photo) : asset('.images/placeholder.jpg') }}" class="card-img-top" alt="Profilová fotka doktora" style="height: 200px; object-fit: cover;">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">{{ $doctor->user->name }}</h5>
+                                <p class="card-id">ID: {{ $doctor->id }}</p> {{--zmena--}}
                                 <p class="card-text">Špecializácia: {{ $doctor->specialization }}</p>
                                 <p class="card-text">Telefónne číslo: {{ $doctor->phone_number }}</p>
                                 <p class="card-text">Kontaktný email: {{ $doctor->user->email }}</p>

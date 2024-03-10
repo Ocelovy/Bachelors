@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- Na začiatku alebo na konci súboru patient_records.blade.php --}}
 
     <div class="container mt-3">
         <h3>Pridať nový záznam</h3>
@@ -36,9 +35,8 @@
     </div>
 
 
-
     <div class="container">
-        <h2>Údaje o pacientovi: {{ $patient->name }}</h2>
+        <h2>Údaje o pacientovi: {{ $patient->title }} {{ $patient->name }}</h2>
         <div>
             <p>Rodné číslo: {{ $patient->birth_number }}</p>
             <p>Kód poisťovne: {{ $patient->insurance_code }}</p>

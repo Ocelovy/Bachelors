@@ -13,7 +13,7 @@ class Patient extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Filterable;
 
-    protected $fillable = ['name', 'email', 'birth_number', 'insurance_code', 'address', 'phone'];
+    protected $fillable = ['title', 'name', 'email', 'birth_number', 'insurance_code', 'address', 'phone', 'contact_person'];
 
     public function doctor()
     {
