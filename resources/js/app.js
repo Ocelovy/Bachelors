@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             doctorCards.forEach(function(card) {
                 const doctorName = card.querySelector('.card-title').textContent.toLowerCase();
-                const doctorId = card.querySelector('.card-id').textContent.toLowerCase(); //zmena
+                const doctorId = card.querySelector('.card-id').textContent.toLowerCase(); //zmena, search id doctor
                 if (doctorName.includes(searchTerm) || doctorId.includes(searchTerm)) { //zmena
                     card.parentElement.style.display = '';
                 } else {
