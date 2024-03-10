@@ -7,6 +7,7 @@ use Aginev\SearchFilters\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -62,5 +63,13 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function ambulances()
+    {
+        return $this->belongsToMany(Ambulance::class, 'user_ambulance', 'user_id', 'ambulance_id');
+    }
 
+    public function hasAmbulance($ambulanceId)
+    {
+        return $this->ambulances->contains('id', $ambulanceId);
+    }
 }

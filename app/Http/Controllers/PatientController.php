@@ -30,8 +30,6 @@ function validateBirthNumber($value) {
     }
     return true;
 }
-
-
 class PatientController extends Controller
 {
     public function create()
@@ -39,10 +37,10 @@ class PatientController extends Controller
         return view('patients.create');
     }
 
-    public function pacientView()
+    public function destroy(Patient $patient)
     {
-        $patients = Patient::all();
-        return view('/patients/pacient', compact('patients'));
+        $patient->delete();
+        return back()->with('success', 'Pacient bol úspešne odstránený.');
     }
 
     public function getPatientInfo(Patient $patient)
@@ -72,6 +70,8 @@ class PatientController extends Controller
             }],
             'insurance_code' => 'required|string|in:0,24,25,27',
             'contact_person' => 'nullable|string|max:20|regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',
+            'titleAfter' => 'nullable|string|max:40',
+            'note' => 'nullable|string',
         ]);
 
         Patient::create($validatedData);
@@ -115,15 +115,17 @@ class PatientController extends Controller
             }],
             'insurance_code' => 'required|string|in:0,24,25,27',
             'contact_person' => 'nullable|string|max:20|regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',
+            'titleAfter' => 'nullable|string|max:40',
+            'note' => 'nullable|string',
         ]);
 
         $patient->update($validatedData);
         return redirect()->route('patients.index')->with('success', 'Pacient bol úspešne aktualizovaný.');
     }
 
-    public function destroy(Patient $patient)
+    public function pacientView()
     {
-        $patient->delete();
-        return back()->with('success', 'Pacient bol úspešne odstránený.');
+        $patients = Patient::all();
+        return view('/patients/pacient', compact('patients'));
     }
 }

@@ -13,16 +13,14 @@ class Patient extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, Filterable;
 
-    protected $fillable = ['title', 'name', 'email', 'birth_number', 'insurance_code', 'address', 'phone', 'contact_person'];
+    protected $fillable = ['title', 'name', 'titleAfter', 'note', 'email', 'birth_number', 'insurance_code', 'address', 'phone', 'contact_person'];
 
     public function doctor()
     {
         return $this->belongsTo(Doctor::class);
     }
-
     public function records()
     {
         return $this->hasMany(PatientRecord::class);
     }
-
 }

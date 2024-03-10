@@ -8,18 +8,32 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $comments = Comment::with('user')->get();
+        $search = $request->query('search');
+        $onlyHolidays = $request->has('holiday') && $request->query('holiday') == '1';
+
+        $comments = Comment::with('user');
+
+        if ($onlyHolidays) {
+            $comments = $comments->where('is_holiday', true);
+        }
+
+        if (!empty($search) && !$onlyHolidays) {
+            $comments = $comments->where(function($query) use ($search) {
+                $query->where('comment', 'like', '%' . $search . '%')
+                    ->orWhereHas('user', function($query) use ($search) {
+                        $query->where('name', 'like', '%' . $search . '%');
+                    })
+                    ->orWhereDate('created_at', $search);
+            });
+        }
+
+        $comments = $comments->get();
+
         return view('comment', compact('comments'));
     }
 
-    public function editView(Comment $comment)
-    {
-        $this->authorize('update', $comment);
-
-        return response()->json(['comment' => $comment]);
-    }
 
     public function create()
     {
@@ -30,10 +44,12 @@ class CommentController extends Controller
     {
         $request->validate([
             'comment' => 'required',
+            'is_holiday' => 'sometimes|boolean',
         ]);
 
         $comment = new Comment();
         $comment->comment = $request->comment;
+        $comment->is_holiday = $request->has('is_holiday');
 
         if (auth()->check()) {
             $comment->user_id = auth()->id();

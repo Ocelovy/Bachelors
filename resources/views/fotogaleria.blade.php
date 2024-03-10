@@ -16,31 +16,31 @@
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{ asset('.images/zilpo_den.jpg') }}" class="d-block w-100" alt="...">
+                            <img src="{{ asset('.images/karousel_lozka1.jpg') }}" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>Vchod od Kauflandu</h5>
-                                <p>Určte si cestu k nám.</p>
+                                <h5>Jednotka intenzívnej starostlivosti</h5>
+                                <p>Najnovšie vybavená JIS s kvalifikovaným personálom.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('.images/liecba_ozonom.jpg') }}" class="d-block w-100" alt="...">
+                            <img src="{{ asset('.images/karousel_stomatolog2.jpg') }}" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>Moderná liečba ozónom</h5>
-                                <p>Revolučné ošetrenie ozónom pre optimálne zdravie a vitalitu.</p>
+                                <h5>Zubná ambulancia</h5>
+                                <p>Profesionálna zubná starostlivosť v každej oblasti.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('.images/zilpo_noc.jpg') }}" class="d-block w-100" alt="...">
+                            <img src="{{ asset('.images/karousel_lieky3.jpg') }}" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>Otváracie hodiny</h5>
-                                <p>Nočné hodiny pre Vašu núdzovú starostlivosť.</p>
+                                <h5>Lekáreň</h5>
+                                <p>Široký sortiment liekov s odborným poradenstvom pre vaše zdravie.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('.images/Žilpo-Žilina-7.jpg') }}" class="d-block w-100" alt="...">
+                            <img src="{{ asset('.images/karousel_graf4.jpg') }}" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>Pohľad z hora</h5>
-                                <p>U nás sa nestratíš.</p>
+                                <h5>Moderná technológia</h5>
+                                <p>Len tie najnovšie technológie pre presnú liečbu.</p>
                             </div>
                         </div>
                     </div>

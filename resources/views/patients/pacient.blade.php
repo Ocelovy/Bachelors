@@ -24,6 +24,10 @@
                 <label for="inputTitle" class="form-label">Titul</label>
                 <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Zadajte titul" value="{{ old('title') }}">
             </div>
+            <div class="col-md-6">
+                <label for="inputTitleAfter" class="form-label">Titul za menom</label>
+                <input type="text" name="titleAfter" class="form-control" id="inputTitleAfter" placeholder="Zadajte titul za menom" value="{{ old('titleAfter') }}">
+            </div>
             <div class="col-md-12">
                 <label for="inputName" class="form-label">Meno a priezvisko<span class="text-danger">*</span></label>
                 <input type="text" name="name" class="form-control" id="inputName" placeholder="Zadajte celé meno" value="{{ old('name') }}" required>
@@ -46,11 +50,20 @@
             </div>
             <div class="form-group">
                 <label for="insurance_code">Kód poisťovne:<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="insurance_code" name="insurance_code" placeholder="24, 25, 27" value="{{ old('insurance_code') }}" required>
+                <select class="form-control custom-select" id="insurance_code" name="insurance_code" required>
+                    <option value="">Vyberte kód poisťovne</option>
+                    <option value="24" {{ old('insurance_code') == "24" ? 'selected' : '' }}>24 - DÔVERA</option>
+                    <option value="25" {{ old('insurance_code') == "25" ? 'selected' : '' }}>25 - VŠEOBECNÁ</option>
+                    <option value="27" {{ old('insurance_code') == "27" ? 'selected' : '' }}>27 – UNION</option>
+                </select>
             </div>
             <div class="col-md-6">
                 <label for="inputContactPerson" class="form-label">Kontaktná osoba</label>
                 <input type="text" name="contact_person" class="form-control" id="inputContactPerson" placeholder="Zadajte telefónne číslo kontaktnej osoby" value="{{ old('contact_person') }}">
+            </div>
+            <div class="col-12">
+                <label for="inputNote" class="form-label">Poznámka</label>
+                <textarea name="note" class="form-control" id="inputNote" placeholder="Zadajte informácie o predchádzajúcich liečbach a ochoreniach, alergie alebo aktuálne lieky">{{ old('note') }}</textarea>
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-primary addPatientButton">Pridať pacienta</button>
@@ -67,11 +80,11 @@
                 <tr>
                     <th>Titul</th>
                     <th>Meno</th>
+                    <th>Titul</th>
                     <th>Email</th>
                     <th>Telefón</th>
                     <th>Adresa</th>
                     <th>Rodné číslo</th>
-                    <th>Kód poisťovne</th>
                     <th>Kontaktná osoba</th>
                     @if(auth()->check() && auth()->user()->isAdmin())
                         <th>Akcie</th>
@@ -80,14 +93,14 @@
                 </thead>
                 <tbody>
                 @foreach($patients as $patient)
-                    <tr>
+                    <tr onclick="window.location.href = '{{ route('patient.records.show', $patient->id) }}'">
                         <td>{{ $patient->title }}</a></td>
                         <td><a href="{{ route('patient.records.show', $patient->id) }}">{{ $patient->name }}</td>
+                        <td>{{ $patient->titleAfter }}</a></td>
                         <td>{{ $patient->email }}</td>
                         <td>{{ $patient->phone }}</td>
                         <td>{{ $patient->address }}</td>
                         <td>{{ $patient->birth_number }}</td>
-                        <td>{{ $patient->insurance_code }}</td>
                         <td>{{ $patient->contact_person }}</td>
                         <td>
                             @if(auth()->check() && auth()->user()->isAdmin() || auth()->user()->isDoktor())
@@ -95,7 +108,7 @@
                                 <form action="{{ route('patients.destroy', $patient->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Odstrániť</button>
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Ste si istí, že chcete odstrániť pacienta s menom {{$patient->name}}?')">Odstrániť</button>
                                 </form>
                             @endif
                         </td>

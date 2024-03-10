@@ -6,6 +6,7 @@ use App\Http\Controllers\{CommentController,
     DoctorController,
     PatientController,
     PatientRecordController,
+    UserAmbulanceController,
     UserController};
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +41,20 @@ Route::group(['middleware' => ['isDoktorOrAdmin']], function () {
     Route::put('/patients/{patient}', [PatientController::class, 'update'])->name('patients.update');
     Route::get('/patients/{patient}/records', [PatientRecordController::class, 'show'])->name('patient.records.show');
     Route::post('/patients/{patient}/records', [PatientRecordController::class, 'store'])->name('patient.records.store');
+    Route::put('/user/{user}/titles', [UserController::class, 'updateTitles'])->name('user.updateTitles');
+    Route::get('/users/{userId}/assign', [UserAmbulanceController::class, 'assignForm'])->name('users.assign.form');
+    Route::post('/users/{userId}/assign', [UserAmbulanceController::class, 'assign'])->name('users.assign');
     });
+    Route::delete('/records/{record}', [PatientRecordController::class, 'destroy'])->name('records.destroy');
+    Route::get('/patients/{patient}/records', [PatientRecordController::class, 'show'])->name('patient.records.show');
+    Route::get('/ambulances', [UserAmbulanceController::class, 'index'])->name('ambulances.index');
+    Route::get('/ambulances/{ambulance}/edit', [UserAmbulanceController::class, 'edit'])->name('ambulances.edit');
+    Route::put('/ambulances/{ambulance}', [UserAmbulanceController::class, 'update'])->name('ambulances.update');
+    Route::post('/ambulances/{ambulance}/assign', [UserAmbulanceController::class, 'assign'])->name('ambulances.users.assign');
+    Route::get('/ambulances/{ambulance}/assignForm', [UserAmbulanceController::class, 'assignForm'])->name('ambulances.assignForm');
+    Route::delete('/ambulances/{ambulance}/users/{user}/remove', [UserAmbulanceController::class, 'remove'])->name('ambulances.users.remove');
+    Route::put('/doctor/{doctor}/specialization', [DoctorController::class, 'updateSpecialization'])->name('doctors.updateSpecialization');
+    Route::get('/ambulances/search', [UserAmbulanceController::class, 'search'])->name('ambulances.search');
 });
 
 Route::get('/fotogaleria', [Controller::class, 'fotogaleriaView'])->name('fotogaleria');
@@ -50,5 +64,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('user', UserController::class);
     Route::resource('name', UserController::class)->except(['create', 'edit', 'update', 'destroy']);
     Route::get('/user/{user}/delete', [UserController::class, 'destroy'])->name('user.delete');
-    Route::get('/comment', [UserController::class, 'commentView'])->name('comment');
+    Route::get('/comment', [CommentController::class, 'index'])->name('comment');
 });
+
+
+
+

@@ -28,8 +28,10 @@
         </div>
     </div>
     <div class="text-box">
-        <h1> Žilinská nemocnica s poliklinikou</h1>
-        <p> Neváhaj a objednaj sa u nás už dnes.</p>
-        <a class="hero-button" href="{{ route('fotogaleria') }}">Navštív nás a dozvi sa viacej</a>
+        <h1>Nemocnica s poliklinikou</h1>
+        <p>Prehľadná správa a manipulácia pacientov.</p>
+        @if(auth()->check())
+        <a class="hero-button" href="{{ route('pacient') }}">Spravuj pacientov</a>
+        @endif
     </div>
 @endsection

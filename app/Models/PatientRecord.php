@@ -10,12 +10,17 @@ class PatientRecord extends Model
     use HasFactory;
 
     protected $fillable = [
-        'patient_id', 'doctor_name', 'subjective_complaints', 'objective_findings', 'diagnosis', 'previous_treatment', 'requested', 'date',
+        'patient_id', 'ambulance_id', 'doctor_name', 'subjective_complaints', 'objective_findings', 'diagnosis', 'previous_treatment', 'requested', 'medications', 'date',
     ];
 
     public function patient()
     {
         return $this->belongsTo(Patient::class);
+    }
+
+    public function ambulance()
+    {
+        return $this->belongsTo(Ambulance::class);
     }
 
     protected $casts = [

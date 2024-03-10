@@ -14,10 +14,6 @@ class UserController extends Controller
     public function __construct() {
         $this->authorizeResource(User::class, 'user');
     }
-    public function loginView()
-    {
-        return view('login');
-    }
 
     public function commentView()
     {
@@ -68,7 +64,9 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:8|confirmed'
+            'password' => 'required|min:8|confirmed',
+            'titlesBefore' => 'nullable|string|max:255',
+            'titlesAfter' => 'nullable|string|max:255',
         ]);
 
         $user = User::create($request->all());
@@ -112,7 +110,9 @@ class UserController extends Controller
         $request->validate([
            'name' => 'required',
            'email' => 'required|email',
-           'password' => 'required|min:8|confirmed'
+           'password' => 'required|min:8|confirmed',
+           'titlesBefore' => 'nullable|string|max:255',
+           'titlesAfter' => 'nullable|string|max:255',
         ]);
         $user->update($request->all());
         return redirect()->route('user.index')->with('alert', 'Uživateľ bol úspešne aktualizovaný!');
@@ -170,6 +170,21 @@ class UserController extends Controller
             return back()->with('success', 'Fotka bola úspešne odstránená.');
         }
         return back()->with('error', 'Nemáte priradenú žiadnu fotku profilu.');
+    }
+
+    public function updateTitles(Request $request, User $user)
+    {
+        $request->validate([
+            'titlesBefore' => 'nullable|string|max:255',
+            'titlesAfter' => 'nullable|string|max:255',
+        ]);
+
+        $user->update([
+            'titlesBefore' => $request->titlesBefore,
+            'titlesAfter' => $request->titlesAfter,
+        ]);
+
+        return back()->with('success', 'Tituly boli úspešne aktualizované.');
     }
 }
 

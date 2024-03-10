@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -12,10 +11,12 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA76F8DVVojuWMWiiBdGg5STY6tPn3RlAw&callback=initMap"></script>
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA76F8DVVojuWMWiiBdGg5STY6tPn3RlAw&callback=initMap"></script> -->
 </head>
 <body>
 @yield('background')
@@ -25,7 +26,7 @@
             <div class="container-fluid">
 
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                    <img src="{{ asset('.images/ZILPO.png') }}" alt="logo_zilpo" class="logo-img me-2">
+                    <img src="{{ asset('.images/LOGO.png') }}" alt="logo_medbridge" class="logo-img me-2">
                     <span class="d-none d-md-inline">{{ config('MedBridge', 'MedBridge') }}</span>
                 </a>
                 <div class="navbar-icons">
@@ -54,7 +55,7 @@
                     <ul class="navbar-nav ms-auto">
                         @auth
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('comment') }}">Komentáre</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('comment') }}">Nástenka</a>
                         </li>
                         @endauth
                         @guest
@@ -93,7 +94,7 @@
                         @auth
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Žilpo
+                                    Systém
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="{{ route('fotogaleria') }}">Fotogaléria</a></li>
@@ -101,7 +102,8 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('pacient') }}">Pridať pacienta</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('ambulances.index') }}">Ambulancie</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('pacient') }}">Pacienti</a></li>
                                     @endif
                                 </ul>
                             </li>

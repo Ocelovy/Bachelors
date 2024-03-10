@@ -26,4 +26,16 @@ class DoctorController extends Controller
         return $this->hasMany(PatientRecord::class, 'doctor_id');
     }
 
+    public function updateSpecialization(Request $request, Doctor $doctor)
+    {
+        $request->validate([
+            'specialization' => 'required|string',
+        ]);
+
+        $doctor->specialization = $request->specialization;
+        $doctor->save();
+
+        return back()->with('success', 'Špecializácia bola úspešne aktualizovaná.');
+    }
+
 }

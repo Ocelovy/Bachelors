@@ -61,6 +61,40 @@
                     <h2>Profil</h2>
                     <p><strong>Meno:</strong> {{ $user->name }}</p>
                     <p><strong>Email:</strong> {{ $user->email }}</p>
+
+
+                    <form action="{{ route('user.updateTitles', $user->id) }}" method="POST" class="mb-3">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="form-group">
+                            <label for="titlesBefore">Tituly pred menom:</label>
+                            <input type="text" class="form-control" id="titlesBefore" name="titlesBefore" value="{{ old('titlesBefore', $user->titlesBefore) }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="titlesAfter">Tituly za menom:</label>
+                            <input type="text" class="form-control" id="titlesAfter" name="titlesAfter" value="{{ old('titlesAfter', $user->titlesAfter) }}">
+                        </div>
+                        @if(optional($user->doctor)->exists)
+                            <div class="specialization-section">
+                                <h3>Špecializácia</h3>
+                                <form action="{{ route('doctors.updateSpecialization', $user->doctor->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="form-group">
+                                        <label for="specialization">Špecializácia:</label>
+                                        <input type="text" name="specialization" class="form-control" id="specialization" value="{{ $user->doctor->specialization }}">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Uložiť zmeny</button>
+                                </form>
+                            </div>
+                        @endif
+
+
+                        <button type="submit" class="btn btn-primary w-100">Aktualizovať informácie</button>
+                    </form>
+
                 </div>
             </div>
         </div>
