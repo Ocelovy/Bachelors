@@ -21,7 +21,7 @@
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ __('Zadaný email je v nesprávnom formáte.') }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -35,7 +35,7 @@
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ __('Zadané heslo je v nesprávnom formáte.') }}</strong>
                                     </span>
                                 @enderror
                             </div>

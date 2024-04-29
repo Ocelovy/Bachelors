@@ -45,11 +45,11 @@
                 <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Ulica, Mesto" value="{{ old('address') }}">
             </div>
             <div class="form-group">
-                <label for="birth_number">Rodné číslo:<span class="text-danger">*</span></label>
+                <label for="birth_number" class="form-label form-heading">Rodné číslo:<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="birth_number" name="birth_number" value="{{ old('birth_number') }}" required>
             </div>
             <div class="form-group">
-                <label for="insurance_code">Kód poisťovne:<span class="text-danger">*</span></label>
+                <label for="insurance_code" class="form-label form-heading">Kód poisťovne:<span class="text-danger">*</span></label>
                 <select class="form-control custom-select" id="insurance_code" name="insurance_code" required>
                     <option value="">Vyberte kód poisťovne</option>
                     <option value="24" {{ old('insurance_code') == "24" ? 'selected' : '' }}>24 - DÔVERA</option>
@@ -86,7 +86,7 @@
                     <th>Adresa</th>
                     <th>Rodné číslo</th>
                     <th>Kontaktná osoba</th>
-                    @if(auth()->check() && auth()->user()->isAdmin())
+                    @if(auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isDoktor() || auth()->user()->isStaff()))
                         <th>Akcie</th>
                     @endif
                 </tr>

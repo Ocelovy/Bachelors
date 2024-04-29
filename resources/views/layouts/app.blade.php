@@ -47,27 +47,29 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
-                        @auth
+                        <li><a class="nav-link" href="{{ route('fotogaleria') }}">Fotogaléria</a></li>
+                        @if(auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isDoktor() || auth()->user()->isStaff()))
                             <a class="nav-link" href="{{ route('user.index') }}">{{__('Používatelia')}}</a>
-                        @endauth
+                        @endif
                     </ul>
 
                     <ul class="navbar-nav ms-auto">
-                        @auth
+                        @if(auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isDoktor() || auth()->user()->isStaff()))
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('comment') }}">Nástenka</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('comment') }}">Nástenka</a>
                         </li>
-                        @endauth
+                        @endif
+
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                    <a class="nav-link" href="{{ route('login') }}">Prihlásiť sa</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                                    <a class="nav-link" href="{{ route('register') }}">Zaregistrovať sa</a>
                                 </li>
                             @endif
                         @else
@@ -75,9 +77,10 @@
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         {{ Auth::user()->name }}
                                     </a>
-
                                     <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                                        @if(auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isDoktor() || auth()->user()->isStaff()))
                                         <a class="dropdown-item" href="{{ route('user.profile') }}">Profil</a>
+                                        @endif
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
@@ -91,23 +94,18 @@
                                 </li>
                         @endguest
 
-                        @auth
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Systém
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a class="dropdown-item" href="{{ route('fotogaleria') }}">Fotogaléria</a></li>
-                                    @if(auth()->check() && auth()->user()->isAdmin() || auth()->user()->isDoktor())
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
+                            @if(auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isDoktor() || auth()->user()->isStaff()))
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Systém
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
                                         <li><a class="dropdown-item" href="{{ route('ambulances.index') }}">Ambulancie</a></li>
                                         <li><a class="dropdown-item" href="{{ route('pacient') }}">Pacienti</a></li>
-                                    @endif
-                                </ul>
-                            </li>
-                        @endauth
+                                    </ul>
+                                </li>
+                            @endif
+
                     </ul>
                 </div>
             </div>

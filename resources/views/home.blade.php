@@ -30,7 +30,7 @@
     <div class="text-box">
         <h1>Nemocnica s poliklinikou</h1>
         <p>Prehľadná správa a manipulácia pacientov.</p>
-        @if(auth()->check())
+        @if(auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isDoktor() || auth()->user()->isStaff()))
         <a class="hero-button" href="{{ route('pacient') }}">Spravuj pacientov</a>
         @endif
     </div>

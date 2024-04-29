@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c013e2ad3ec96c81f73438f9900584b9",
+    "content-hash": "44485cf14c0efc7fddf34d8238027dfe",
     "packages": [
         {
             "name": "alexpechkarev/geometry-library",
@@ -1254,48 +1254,6 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
-        },
-        {
-            "name": "hrkut/datagrid",
-            "version": "2.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hrkut/datagrid.git",
-                "reference": "601c7fdbe3a51796911f9447067b4f8d688443be"
-            },
-            "require": {
-                "laravel/framework": ">9.0",
-                "php": ">8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Aginev\\Datagrid\\DatagridServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Aginev\\Datagrid\\": "src"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Atanas Ginev",
-                    "email": "me@aginev.com"
-                }
-            ],
-            "description": "Datagrid Package for Laravel v5+",
-            "homepage": "http://aginev.com",
-            "keywords": [
-                "Datagrid",
-                "Datagrid Package for Laravel"
-            ],
-            "time": "2023-12-06T11:08:44+00:00"
         },
         {
             "name": "hrkut/search-filters",

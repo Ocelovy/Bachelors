@@ -26,16 +26,17 @@ class DoctorController extends Controller
         return $this->hasMany(PatientRecord::class, 'doctor_id');
     }
 
-    public function updateSpecialization(Request $request, Doctor $doctor)
-    {
-        $request->validate([
-            'specialization' => 'required|string',
+    public function updateSpecialization(Request $request, $doctorId) {
+        $validatedData = $request->validate([
+            'specialization' => 'required|string|max:255',
+            'phone_number' => 'nullable|string|max:15',
+            'additional_contact' => 'nullable|string|max:50',
         ]);
 
-        $doctor->specialization = $request->specialization;
-        $doctor->save();
+        $doctor = Doctor::findOrFail($doctorId);
+        $doctor->update($validatedData);
 
-        return back()->with('success', 'Špecializácia bola úspešne aktualizovaná.');
+        return redirect()->back()->with('success', 'Údaje boli aktualizované úspešne.');
     }
 
 }

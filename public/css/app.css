@@ -53,6 +53,15 @@ body::before {
     object-fit: cover;
 }
 
+#updatePatientButton {
+    margin: 8px;
+}
+
+.form-heading {
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .container, .card {
     background-color: #ffffff;
     border-radius: 10px;
@@ -258,6 +267,33 @@ button:hover {
     background-color: #801818;
 }
 
+#profileButton {
+    margin: 8px;
+}
+
+.container:hover {
+    transform: none;
+}
+.background-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.pagination nav {
+    margin-top: 20px;
+}
+.page-link {
+    color: #007bff;
+}
+.page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+.table th, .table td {
+    vertical-align: middle;
+}
+
 .card {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     border-radius: 8px;
@@ -284,10 +320,6 @@ button:hover {
     border-radius: 10px;
     transition: transform 0.2s;
     overflow: hidden;
-}
-
-.card:hover {
-    transform: scale(1.05);
 }
 
 .bottom-panel {
@@ -406,14 +438,64 @@ button:hover {
 }
 
 .input-group {
-    margin-bottom: 30px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+}
+
+.btn.btn-success {
+    margin-top: 10px;
 }
 
 .input-group .form-control:focus {
     border-color: #80bdff;
     outline: none;
     box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.pagination .btn {
+    margin-right: 5px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn.disabled, .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+}
+.btn-warning, .btn-success {
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
 }
 
 .btn-outline-secondary {

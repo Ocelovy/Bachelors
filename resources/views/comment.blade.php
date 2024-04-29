@@ -10,7 +10,7 @@
             <form action="{{ route('comments.store') }}" method="POST" class="comment-form">
                 @csrf
                 <h1>Nástenka</h1>
-                <label for="comment">Koment:</label>
+                <label for="comment">Komentár:</label>
                 <textarea name="comment" required></textarea>
                 <input class="form-check-input" type="checkbox" name="is_holiday" id="is_holiday" value="1">
                 <label for="is_holiday">Týka sa dovolenky</label>
@@ -20,11 +20,18 @@
         </div>
         <div class="comments-container">
             <div class="col-md-4">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="holidaySwitch" name="holiday" value="1" {{ request()->query('holiday') == '1' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="holidaySwitch">Len dovolenky</label>
-                </div>
                 <form action="{{ route('comment') }}" method="GET" class="input-group">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="holidaySwitch" name="holiday" value="1" onchange="this.form.submit()" {{ request()->query('holiday') == '1' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="holidaySwitch">Len dovolenky </label>
+                    </div>
+                </form>
+
+                <form action="{{ route('comment') }}" method="GET" class="input-group">
+                    @if(request()->query('holiday') == '1')
+                        <input type="hidden" name="holiday" value="1">
+                    @endif
+
                     <input type="text" name="search" class="form-control" id="comment-searchbar" placeholder="Vyhľadať komentár..." value="{{ request()->query('search') }}">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-outline-secondary">Vyhľadať</button>
@@ -51,11 +58,9 @@
                             <button type="submit" class="deleteCommentButton">Odstrániť</button>
                         </form>
                     @endcan
-                        <small class="comment-time">{{ $comment->created_at->format('d.m.Y H:i ') }}</small>
+                    <small class="comment-time">{{ $comment->created_at->format('d.m.Y H:i ') }}</small>
                 </div>
             @endforeach
-
         </div>
     </div>
-
 @endsection

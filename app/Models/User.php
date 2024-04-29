@@ -19,7 +19,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ['name', 'email', 'password', 'photo'];
+    protected $fillable = ['name', 'email', 'password', 'photo', 'titlesBefore', 'titlesAfter'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -39,6 +39,11 @@ class User extends Authenticatable
     public function isDoktor()
     {
         return $this->role === 'Doktor';
+    }
+
+    public function isStaff()
+    {
+        return $this->role === 'Staff';
     }
 
     /**
@@ -72,4 +77,10 @@ class User extends Authenticatable
     {
         return $this->ambulances->contains('id', $ambulanceId);
     }
+
+    public function doctor()
+    {
+        return $this->hasOne(Doctor::class);
+    }
+
 }

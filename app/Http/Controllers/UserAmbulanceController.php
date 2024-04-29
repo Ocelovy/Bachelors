@@ -26,16 +26,36 @@ class UserAmbulanceController extends Controller
         return redirect()->route('ambulances.index')->with('success', 'Užívatelia boli priradení.');
     }
 
+    public function create()
+    {
+        return view('ambulances.index');
+    }
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        Ambulance::create($validatedData);
+
+        return redirect()->route('ambulances.index')->with('success', 'Nová ambulancia bola pridaná.');
+    }
+
     public function edit($id)
     {
         $ambulance = Ambulance::findOrFail($id);
-        $users = User::all();
+        $users = User::where('role', '!=', 'user')->get();
 
         return view('ambulances.edit', compact('ambulance', 'users'));
     }
 
     public function __construct() {
         $this->middleware('auth');
+    }
+    protected $appends = ['title'];
+
+    public function getTitleAttribute() {
+        return $this->attributes['title'] ?? '';
     }
 
     public function assignForm($ambulanceId)
@@ -45,7 +65,12 @@ class UserAmbulanceController extends Controller
         $users = User::whereIn('role', ['Doktor', 'Staff'])->whereNotIn('id', $assignedUserIds)->get();
         return view('ambulances.assign', compact('ambulance', 'users'));
     }
+    public function editEmployees($id) {
+        $ambulance = Ambulance::find($id);
+        $users = User::where('role', '!=', 'user')->get();
 
+        return view('ambulances.edit', compact('ambulance', 'users'));
+    }
     public function assign(Request $request, Ambulance $ambulance)
     {
         $userIds = $request->input('user_ids');
@@ -77,5 +102,8 @@ class UserAmbulanceController extends Controller
 
         return view('ambulances.index', compact('ambulances'));
     }
+
+
+
 
 }

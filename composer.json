@@ -9,7 +9,6 @@
         "alexpechkarev/google-maps": "^10.0",
         "barryvdh/laravel-debugbar": "^3.9",
         "guzzlehttp/guzzle": "^7.2",
-        "hrkut/datagrid": "^2.0",
         "hrkut/search-filters": "^1.0",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
@@ -69,13 +68,5 @@
     "minimum-stability": "stable",
     "prefer-stable": false,
     "repositories": [
-    {
-        "url": "https://github.com/hrkut/datagrid.git",
-        "type": "git"
-    },
-    {
-        "url": "https://github.com/hrkut/search-filters.git",
-        "type": "git"
-    }
 ]
 }

@@ -5,9 +5,6 @@
 @endsection
 
 @section('content')
-
-    {{-- ... zvyšok vašej šablóny ... --}}
-
     <div class="container">
         <h1>Ambulancie</h1>
         <div class="input-group mb-3">
@@ -23,6 +20,16 @@
             <tbody id="ambulances-table-body">
             </tbody>
         </table>
+        <div class="add-ambulance-form">
+            <h2></h2>
+            <form action="{{ route('ambulances.store') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <input type="text" class="form-control" name="name" placeholder="Názov ambulancie" required>
+                </div>
+                <button type="submit" class="btn btn-success">Pridať novú ambulanciu</button>
+            </form>
+        </div>
     </div>
 
         <script>
@@ -34,7 +41,7 @@
                         data: { search: query },
                         success: function(data) {
                             var tbody = $('#ambulances-table-body');
-                            tbody.empty(); // Vyčistíme tabuľku
+                            tbody.empty();
                             if(data.length > 0) {
                                 data.forEach(function(ambulance) {
                                     tbody.append(
@@ -53,7 +60,6 @@
                     });
                 }
 
-                // Inicializačné načítanie všetkých ambulancií
                 searchAmbulances('');
 
                 $('#search-ambulance').on('input', function() {

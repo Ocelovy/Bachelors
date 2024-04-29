@@ -26,21 +26,21 @@
                             <img src="{{ asset('.images/karousel_stomatolog2.jpg') }}" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Zubná ambulancia</h5>
-                                <p>Profesionálna zubná starostlivosť v každej oblasti.</p>
+                                <p>Profesionálna starostlivosť v každej oblasti.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <img src="{{ asset('.images/karousel_lieky3.jpg') }}" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Lekáreň</h5>
-                                <p>Široký sortiment liekov s odborným poradenstvom pre vaše zdravie.</p>
+                                <p>Široký sortiment liekov s odborným poradenstvom pre zdravie.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
                             <img src="{{ asset('.images/karousel_graf4.jpg') }}" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Moderná technológia</h5>
-                                <p>Len tie najnovšie technológie pre presnú liečbu.</p>
+                                <p>Len tie najnovšie prístroje na presnú liečbu.</p>
                             </div>
                         </div>
                     </div>

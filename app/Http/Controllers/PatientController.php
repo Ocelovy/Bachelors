@@ -46,7 +46,7 @@ class PatientController extends Controller
     public function getPatientInfo(Patient $patient)
     {
         $user = auth()->user();
-        if ($user->isDoktor() || $user->isAdmin()) {
+        if ($user->isDoktor() || $user->isAdmin() || $user->isStaff()) {
             $patients = Patient::all();
             return response()->json($patient);
         } else {
@@ -63,7 +63,6 @@ class PatientController extends Controller
             'phone' => 'nullable|string|max:20|regex:/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/',
             'address' => 'nullable|string|max:255',
             'birth_number' => ['required', 'regex:/^\d{10}$/', 'unique:patients,birth_number', function ($attribute, $value, $fail) {
-
                 if (!validateBirthNumber($value)) {
                     $fail('Rodné číslo je neplatné.');
                 }
@@ -81,7 +80,7 @@ class PatientController extends Controller
     public function index()
     {
         $user = auth()->user();
-        if ($user->isDoktor() || $user->isAdmin()) {
+        if ($user->isDoktor() || $user->isAdmin() || $user->isStaff()) {
             $patients = Patient::all();
         return view('/patients/pacient', compact('patients'));
         } else {
@@ -92,7 +91,7 @@ class PatientController extends Controller
     public function edit(Patient $patient)
     {
         $user = auth()->user();
-        if ($user->isDoktor() || $user->isAdmin()) {
+        if ($user->isDoktor() || $user->isAdmin() || $user->isStaff()) {
             $patients = Patient::all();
             return view('patients.edit', compact('patient'));
         } else {

@@ -67,6 +67,7 @@ function controllPhoto() {
         };
     }
 }
+
 function vanishNotification() {
     var notification = document.getElementById('notification');
     if (notification) {

@@ -10,35 +10,38 @@
         <h3>Výmenný lístok</h3>
         <form action="{{ route('patient.records.store', $patient->id) }}" method="POST">
             @csrf
-            <div class="mb-3">
-                <label for="subjective_complaints" class="form-label">Subj. obtiaže</label>
-                <textarea class="form-control" id="subjective_complaints" name="subjective_complaints"></textarea>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="subjective_complaints" class="form-label">Subj. obtiaže</label>
+                    <textarea class="form-control" id="subjective_complaints" name="subjective_complaints"></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="objective_findings" class="form-label">Objekt. nález<span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="objective_findings" name="objective_findings" required></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="diagnosis" class="form-label">Diagnóza</label>
+                    <textarea class="form-control" id="diagnosis" name="diagnosis"></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="previous_treatment" class="form-label">Doterajšia liečba</label>
+                    <textarea class="form-control" id="previous_treatment" name="previous_treatment"></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="requested" class="form-label">Požadované</label>
+                    <textarea class="form-control" id="requested" name="requested"></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="medications" class="form-label">Lieky</label>
+                    <textarea class="form-control" id="medications" name="medications"></textarea>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="objective_findings" class="form-label">Objekt. nález<span class="text-danger">*</span></label>
-                <textarea class="form-control" id="objective_findings" name="objective_findings" required></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="diagnosis" class="form-label">Diagnóza<span class="text-danger"></span></label>
-                <textarea class="form-control" id="diagnosis" name="diagnosis"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="previous_treatment" class="form-label">Doterajšia liečba</label>
-                <textarea class="form-control" id="previous_treatment" name="previous_treatment"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="requested" class="form-label">Požadované</label>
-                <textarea class="form-control" id="requested" name="requested"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="medications" class="form-label">Lieky</label>
-                <textarea class="form-control" id="medications" name="medications"></textarea>
-            </div>
-            <div class="mb-3">
+            <div class="row">
+            <div class="col-md-3 mb-3">
                 <label for="date" class="form-label">Dátum<span class="text-danger">*</span></label>
                 <input type="date" class="form-control" id="date" name="date" required>
             </div>
-            <div class="mb-3">
+            <div class="col-md-6 mb-3">
                 <label for="ambulance" class="form-label">Ambulancia<span class="text-danger">*</span></label>
                 <select class="form-control" id="ambulance" name="ambulance_id" required>
                     <option value="">Vyberte ambulanciu</option>
@@ -47,21 +50,23 @@
                     @endforeach
                 </select>
             </div>
+            </div>
 
-            <button type="submit" class="btn btn-primary">Pridať</button>
+            <button type="submit" class="btn btn-primary">Vytvoriť výmenný lístok</button>
         </form>
     </div>
+
 
     <div class="container">
         <h2> {{ $patient->title }} {{ $patient->name }} {{ $patient->titleAfter }}</h2>
         <div>
-            <p>Rodné číslo: {{ $patient->birth_number }}</p>
-            <p>Kód poisťovne: {{ $patient->insurance_code }}</p>
-            <p>Bydlisko: {{ $patient->address }}</p>
-            <p>Email: {{ $patient->email }}</p>
-            <p>Telefón: {{ $patient->phone }}</p>
-            <p>Kontaktná osoba: {{ $patient->contact_person }}</p>
-            <p>Poznámka: {{ $patient->note }}</p>
+            <p><strong>Rodné číslo: </strong>{{ $patient->birth_number }}</p>
+            <p><strong>Kód poisťovne: </strong>{{ $patient->insurance_code }}</p>
+            <p><strong>Bydlisko: </strong>{{ $patient->address }}</p>
+            <p><strong>Email: </strong>{{ $patient->email }}</p>
+            <p><strong>Telefón: </strong>{{ $patient->phone }}</p>
+            <p><strong>Kontaktná osoba: </strong>{{ $patient->contact_person }}</p>
+            <p><strong>Poznámka: </strong>{{ $patient->note }}</p>
 
         </div>
         <div>

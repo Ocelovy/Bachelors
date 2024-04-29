@@ -11,21 +11,20 @@ class CommentController extends Controller
     public function index(Request $request)
     {
         $search = $request->query('search');
-        $onlyHolidays = $request->has('holiday') && $request->query('holiday') == '1';
+        $onlyHolidays = $request->query('holiday') == '1';
 
         $comments = Comment::with('user');
 
         if ($onlyHolidays) {
-            $comments = $comments->where('is_holiday', true);
+            $comments = $comments->where('is_holiday', 1);
         }
 
-        if (!empty($search) && !$onlyHolidays) {
+        if (!empty($search)) {
             $comments = $comments->where(function($query) use ($search) {
                 $query->where('comment', 'like', '%' . $search . '%')
                     ->orWhereHas('user', function($query) use ($search) {
                         $query->where('name', 'like', '%' . $search . '%');
-                    })
-                    ->orWhereDate('created_at', $search);
+                    });
             });
         }
 
@@ -33,6 +32,7 @@ class CommentController extends Controller
 
         return view('comment', compact('comments'));
     }
+
 
 
     public function create()
@@ -49,7 +49,8 @@ class CommentController extends Controller
 
         $comment = new Comment();
         $comment->comment = $request->comment;
-        $comment->is_holiday = $request->has('is_holiday');
+        $comment->is_holiday = $request->boolean('is_holiday');
+        //$comment->name = auth()->user();
 
         if (auth()->check()) {
             $comment->user_id = auth()->id();

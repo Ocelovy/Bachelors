@@ -12,7 +12,7 @@
         @csrf
             <select name="user_ids[]" multiple class="form-control mb-2">
                 @foreach($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    <option value="{{ $user->id }}">{{ $user->titlesAfter }} {{ $user->name }} {{ $user->titlesBefore }} - {{ $user->role }}</option>
                 @endforeach
             </select>
             <button type="submit" class="btn btn-success mb-3">Priradiť</button>
@@ -22,7 +22,7 @@
         <ul class="list-group">
             @foreach($ambulance->users as $user)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ $user->name }}
+                    {{ $user->titlesBefore ?: '' }} {{ $user->name }}
                     <form action="{{ route('ambulances.users.remove', ['ambulance' => $ambulance, 'user' => $user]) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')

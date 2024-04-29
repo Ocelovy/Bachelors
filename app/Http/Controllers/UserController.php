@@ -26,23 +26,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::query()->filter($request->get('f', []))->get();
+        $users = User::paginate(25);
+        return view('user.index', compact('users'));
 
-        $grid = new Datagrid($users, $request->get('f', []));
-
-        $grid->setColumn('name', 'Full name', ['sortable' => true, 'has_filters' => true])
-            ->setColumn('email', 'Email address', ['sortable' => true, 'has_filters' => true])
-            ->setColumn('created_at', 'created_at', ['sortable' => true, 'has_filters' => true])
-            ->setActionColumn([
-                'wrapper' => function ($value, $row) {
-                    return (Auth::user()->can('update', $row->getData()) ? '<a href="' . route('user.edit', [$row->id]) . '" title="Edit" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i></a> ': '') .
-                        (Auth::user()->can('delete', $row->getData()) ? '<a href="' . route('user.delete', [$row->id]) . '" title="Delete" class="btn btn-sm btn-danger" onclick="confirm(\'Určite chcete vymazať používateľa ?\')"><i class="bi bi-trash"></i></a>' : '');
-                }
-            ]);
-
-        return view('user.index', [
-            'grid' => $grid
-        ]);
     }
 
     /**
@@ -172,19 +158,17 @@ class UserController extends Controller
         return back()->with('error', 'Nemáte priradenú žiadnu fotku profilu.');
     }
 
-    public function updateTitles(Request $request, User $user)
-    {
-        $request->validate([
-            'titlesBefore' => 'nullable|string|max:255',
-            'titlesAfter' => 'nullable|string|max:255',
+    public function updateTitles(Request $request, $userId) {
+        $validatedData = $request->validate([
+            'titlesBefore' => 'nullable|string|max:50',
+            'titlesAfter' => 'nullable|string|max:50',
         ]);
 
-        $user->update([
-            'titlesBefore' => $request->titlesBefore,
-            'titlesAfter' => $request->titlesAfter,
-        ]);
+        $user = User::findOrFail($userId);
+        $user->update($validatedData);
 
-        return back()->with('success', 'Tituly boli úspešne aktualizované.');
+        return redirect()->route('user.profile')->with('success', 'Tituly boli aktualizované úspešne.');
     }
+
 }
 

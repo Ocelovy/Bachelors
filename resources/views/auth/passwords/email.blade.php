@@ -25,7 +25,7 @@
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ __('Zadaná emailová adresa je v nesprávnom formáte.') }}</strong>
                                     </span>
                                 @enderror
                             </div>
